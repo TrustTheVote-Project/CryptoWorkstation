@@ -1,0 +1,68 @@
+#!/bin/bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+DDIR="$HOME/Desktop/Decrypted"
+if [ ! -e $DDIR ]
+then
+    echo "FATAL ERROR: Decrypted ballot folder non-existent: $DDIR"
+    IFS=$SAVEIFS
+    exit 1
+fi
+EDIR="/media"
+if [ ! -e $EDIR ]
+then
+    echo "FATAL ERROR: Encrypted ballot folder non-existent: $EDIR"
+    IFS=$SAVEIFS
+    exit 1
+fi
+T=0
+DIRS=`ls $EDIR/`
+if [ "$DIRS" ]
+then
+    N=0
+    F=0
+    echo "Decrypted ballot folder: $DDIR"
+    for d in $DIRS
+    do
+	echo -e "\nFound external media: $d"
+	read -p "Decrypt from this media [y/n]? " yn
+	if `echo ${yn} | grep [Yy] 1>/dev/null 2>&1`
+	then
+	    for f in `ls $EDIR/$d/`
+	    do
+		if `echo ${f} | grep -i -e \.gpg$ -e \.asc$ 1>/dev/null 2>&1`
+		then
+                    let N+=1
+		    echo "$N $EDIR/$d/$f"
+		    echo -n "  "
+		    /bin/cp "$EDIR/$d/$f" $DDIR
+		    /usr/bin/gpg --batch --decrypt-files $DDIR/$f
+		    if [ $? -ne "0" ]
+		    then
+			let F+=1
+		    else
+			let T+=1
+		    fi
+		    /bin/rm -rf $DDIR/$f
+		fi
+	    done
+            if  [ "$N" -eq 0 ]
+	    then
+		echo "No encrypted files."
+	    fi
+	fi
+    done
+else
+    echo "No external media (CD/DVD/USB) found."
+    IFS=$SAVEIFS
+    exit 0
+fi
+if  [ "$F" -eq 0 ]
+then
+    echo -e "\nNo decryption failures."
+else
+    echo -e "\nTotal number of decryption failures: $F"
+fi
+echo -e "Total number of decrypted files: $T\n"
+IFS=$SAVEIFS
+exit 0

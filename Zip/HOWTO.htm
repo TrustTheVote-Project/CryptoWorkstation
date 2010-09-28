@@ -1,0 +1,339 @@
+<HTML>
+<HEAD>
+<TITLE>DCdVBM Crypto Workstation</TITLE>
+<STYLE TYPE="text/css">
+<!--
+BODY
+   {
+   font-size:18;
+   }
+-->
+<!--
+CODE
+   {
+   font-size:18;
+   font-weight:bold;
+   }
+-->
+</STYLE>
+</HEAD>
+
+<BODY>
+
+<H2>DCdVBM Crypto Workstation</H2>
+
+<P>DCdVBM stands for "District of Columbia Digital Vote-By-Mail."  This
+  document describes how to use the DCdVBM Crypto Workstation to perform the
+  following types of operations: 
+<ul>
+<li><A HREF="#KEY">Key Generation and Backup</A></li>
+<li><A HREF="#DEC">Ballot Decryption</A></li>
+<li><A HREF="#TES">Testing</A></li>
+</ul>
+</P>
+
+<P>Requirements: The DCdVBM Crypto Workstation is a specialized computer
+operating environment delivered on bootable external media (CD/DVD/USB drive).
+The Personal Computer on which the Crypto Workstation is installed must have a
+minimum of two external media devices, one dedicated to booting and running
+the Crypto Workstation, and the other for writing data files to external
+media.</P>
+
+<HR>
+<A NAME="KEY">
+<H2>DCdVBM Key Generation and Backup</A></H2>
+
+<P>Before generating the cryptographic key pair to be used in the DCdVBM
+project, pick a strong pass phrase to protect the secret key (also called the
+private key), and write it down on a piece of paper
+(see <A HREF="#PASS">Pass Phrase Selection</A> for information on how to pick a
+good strong pass phrase).  Take good care of this piece of paper, because the
+pass phrase written on it is as sensitive as the secret key itself.  After the
+keys are generated, make backups and write them to CDs for permanent storage.
+Public key CDs may be distributed to anyone who needs them, for encrypting
+ballots.  Secret key CDs must be placed in secure storage, as must the paper
+on which the pass phrase is written, to be retrieved and used during
+the <A HREF="#DEC">DCdVBM Ballot Decryption</A> process.</P>
+
+<H3>Key Generation</H3>
+
+
+<P><IMG SRC="../Documents/GPAIcon.jpg" align="left" height="48px">
+Double-click on the GPA icon on the left side of your screen.  This starts up
+the GNU Privacy Assistant (GPA).  A notification window will pop up, about you
+not having a private key, so
+hit <IMG SRC="../Documents/GPAGenerateKeyNowButton.jpg" height="18px">.  You
+will be asked to type in three things: a name, email address, and pass phrase
+(twice). We recommend including the upper-case characters DCDVBM in the name,
+and any valid-looking email address will suffice.  After entering the pass phrase,
+you are asked to create a backup copy of the new key, so
+hit <IMG SRC="../Documents/GPAForwardButton.jpg" height="18px">.  Now the key
+pair is being generated, which may take some time.  Finally, a default name
+for the backup file (secret-key-XXXXXXXX.asc) is shown.  Replace the XXXXXXXX
+part of the file name with DCDVBM, then save the file by
+hitting <IMG SRC="../Documents/GPASaveButton.jpg" height="18px"> and then
+<IMG SRC="../Documents/GPACloseButton.jpg" height="18px">.</P>
+
+<P>So far, a key pair has been generated, and the secret key has been written
+to a backup file, named <code>secret-key-DCDVBM.asc</code>.  Now you must
+backup the public key.</P>
+
+<H3>Key Backup</H3>
+
+<P><IMG SRC="../Documents/GPAIcon.jpg" align="left" height="48px"> Start up
+the GPA by double-clicking on the GPA icon.  A familiar-looking notification
+window will pop up, but ignore it's request for private key generation by
+hitting <IMG SRC="../Documents/GPADoItLaterButton.jpg" height="18px">.  To
+backup the public key, select (click on) the key, then
+hit <IMG SRC="../Documents/GPAKeyExportIcon.jpg" height="18px"> (Export Keys).
+Enter the file name <code>public-key-DCDVBM.asc</code> and then
+hit <IMG SRC="../Documents/GPASaveButton.jpg" height="18px">
+and <IMG SRC="../Documents/GPACloseButton.jpg" height="18px">. </P>
+
+<P>Both keys are
+now stored in local backup files, but in order to retain permanent copies of
+these keys, you must write the backup files to CDs.  If the backups are not
+written to external media, then the keys will disappear once you exit the
+DCdVBM Crypto Workstation, and you will have to start over again, repeating
+the steps outlined above.  </P>
+
+<P><IMG SRC="../Documents/ComputerIcon.jpg" align="left"
+height="48px"> Open (double-click) the Computer icon on the left side of
+your screen, then select <IMG SRC="../Documents/GPALiveuserSelection.jpg"
+height="18px"> from the left pane.  In the large viewing pane on the bottom
+right, you will find two files named <code>public-key-DCDVBM.asc</code> and
+<code>secret-key-DCDVBM.asc</code>.</P>
+
+<H3>Secret Key CD</H3>
+
+<P>Write "DCdVBM Secret Key" on a blank CD and insert it into the computer.
+window will pop up asking you to "Choose what application to launch", with
+CD/DVD Creator as the default.  Hit <IMG SRC="../Documents/CDOKButton.jpg"
+height="18px">.  Drag the <code>secret-key-DCDVBM.asc</code> file from
+the <IMG SRC="../Documents/GPALiveuserSelection.jpg" height="18px"> folder
+into the CD/DVD Creator Folder.
+Hit <IMG SRC="../Documents/CDWriteToDiskButton.jpg" height="18px"> and
+then <IMG SRC="../Documents/CDBurnButton.jpg" height="18px"> to burn the
+CD. If you get a message saying "Please eject the disk ... manually" go ahead
+and do so, and then hit <IMG SRC="../Documents/GPACancelButton.jpg"
+height="18px">.  
+
+Finally, hit
+<IMG SRC="../Documents/GPACloseButton.jpg" height="18px">.  </P>
+
+<P>These same instructions apply if writing to a DVD.  If writing to a USB
+drive, click on the <IMG SRC="../Documents/ComputerIcon.jpg" height="18px">
+Computer icon to open up a window, find the appropriate USB device in the left
+pane, and drag your files from
+the <IMG SRC="../Documents/GPALiveuserSelection.jpg" height="18px"> folder
+onto the USB device to write them there.</P>
+
+<H3>Public Key CD</H3>
+
+<P>Write "DCdVBM Public Key" on a blank CD and insert it into the computer.  A
+window will pop up asking you to "Choose what application to launch", with
+CD/DVD Creator as the default.  Hit <IMG SRC="../Documents/CDOKButton.jpg"
+height="18px">.  Since you have previously burned the secret key to a CD, the
+secret key backup file may appear in
+the CD/DVD Creator Folder.  If so,
+remove it (click on it and hit the "Delete" key).  Drag the
+<code>public-key-DCDVBM.asc</code> file from
+the <IMG SRC="../Documents/GPALiveuserSelection.jpg" height="18px"> folder
+into the CD/DVD Creator Folder.
+Hit <IMG SRC="../Documents/CDWriteToDiskButton.jpg" height="18px"> and then
+<IMG SRC="../Documents/CDBurnButton.jpg" height="18px"> to burn the CD. Repeat
+as desired. </P>
+
+<H3>Testing</H3>
+
+<P>Before shutting down the DCdVBM Crypto Workstation, you should test the new
+keys to ensure that they can successfully encrypt and decrypt ballots, and you
+should also test the backup CDs, to make sure they contain valid data.
+See <A href="#TES">Testing</A> for instructions on how to test the keys.  The
+new keys can be tested immediately after their backup copies are burned to CD.
+To test the backup CDs, delete the keys from the GPA, and then re-run the
+tests, which will require re-importation of the keys from backup CDs. </P>
+
+<HR>
+<A NAME="DEC">
+<H2>DCdVBM Ballot Decryption</A></H2>
+
+<P>A secret key is required for decryption, and the first step is to import
+this key, so go ahead and fetch the DCdVBM Secret Key CD from secure
+storage.</P>
+
+<A NAME="IMPORT">
+<H3>Key Import</H3>
+
+<P>Insert the DCdVBM Secret Key CD into the computer, and wait for the CD icon
+to appear on your screen <IMG SRC="../Documents/GPAIcon.jpg" align="left"
+height="48px">. Start up the GPA by double-clicking on the GPA icon.  A
+notification window will pop up, about you not having a private key (but you
+are about to import one), so
+hit <IMG SRC="../Documents/GPADoItLaterButton.jpg" height="18px">.  To import
+the secret key, hit <IMG SRC="../Documents/GPAKeyImportIcon.jpg"
+height="18px"> (Import Keys).  Browse to the CD, select the file
+named <code>secret-key-DCDVBM.asc</code>, then
+hit <IMG SRC="../Documents/GPAOpenButton.jpg" height="18px"> (if you are asked
+any questions at this point, choose the option that allows you to proceed with
+the import) and <IMG SRC="../Documents/GPACloseButton.jpg" height="18px">.
+The DCdVBM secret key is now available for decrypting ballots.  To import the
+DCdVBM public key, repeat this process using the DCdVBM Public Key CD and the
+file named <code>public-key-DCDVBM.asc</code>. </P>
+
+<H3>Ballot Decryption</H3>
+
+<P>First ensure that the Decrypted folder on the desktop is empty, as this is
+where the decrypted ballots are placed (it might contain sample ballots, for
+instance, if testing had just been performed).  Insert the CD containing the
+DCdVBM encrypted ballots into the PC, and wait for the CD icon to appear on
+the desktop. (These same instructions apply if the encrypted ballots are on
+external media other than CD, such as DVD or a USB drive.) From the pull-down
+menu at the top of your screen, open up
+<IMG SRC="../Documents/FedoraIcon.jpg" height="18px"> Applications,
+<IMG SRC="../Documents/SystemToolsIcon.jpg" height="18px"> System Tools,
+<IMG SRC="../Documents/TerminalIcon.jpg" height="18px"> Terminal.  First, to
+check and see what ballots are available for decrypting, type the following command
+into the Terminal window: <code>ballots</code> </P> 
+
+<P>If everything looks satisfactory, go ahead and enter the following command
+to decrypt the ballots: <code>decrypt</code></P>
+
+<P>Decryption requires access to the secret key, so you will be prompted for
+the pass phrase, but only once, because after first usage it is securely cached
+for use in subsequent decryptions.  All of the encrypted ballot files on
+external media, that is, all files ending in .gpg or .asc appearing at the top
+level of such media, will be decrypted and placed in the Decrypted folder on
+the desktop.</P>
+
+<P>For instructions on testing the ballot decryption process, which is highly
+recommended, see <A HREF="#TBD">Testing Ballot Decryption</A> below.</P>
+
+<H3>Printing Ballots</H3>
+
+<P>Because of the enhanced security rules in effect for the operating
+environment of the DCdVBM Crypto Workstation, facilities for adding a printer
+to the environment may be not available at this time.  We are still searching
+for a solution to this problem, but for now, to print the decrypted ballots,
+write them to CD/DVD/USB and print from a different computer.</P>
+
+<HR>
+<A NAME="TES">
+<H2>Testing</H2>
+
+<P>After generating new keys and before shutting down the DCdVBM Crypto
+Workstation, the new keys should be tested to ensure they can be used to
+encrypt and decrypt ballots, and the ballot decryption process should be
+tested to make sure it will work when required.  Some sample ballots (PDF
+files) have been provided for testing purposes, stored in the Samples folder
+on the desktop. </P>
+
+<A NAME="TK">
+<H3>Testing Keys</H3>
+
+<P><IMG SRC="../Documents/GPAIcon.jpg" align="left" height="48px" /> Start up
+the GPA (do not create a new key).  If no keys are present, import the DCdVBM
+public and secret keys from CD (see <A HREF="#IMPORT">Key Import</A>).  In the GPA window,
+hit <IMG SRC="../Documents/GPAFileManagerIcon.jpg" height="18px"> (File
+Manager) to open the GPA File Manager. Next
+hit <IMG SRC="../Documents/GPAFileOpenIcon.jpg" height="18px"> (Open a file)
+to browse for files.  Choose <IMG SRC="../Documents/GPADesktopSelection.jpg"
+height="18px"> from the left pane,
+then <IMG SRC="../Documents/GPASamplesSelection.jpg" height="18px">, then
+hit <IMG SRC="../Documents/GPAOpenButton.jpg" height="18px">.  Select all of
+the sample ballots (each selected item is highlighted in blue), then
+hit <IMG SRC="../Documents/GPAOpenButton.jpg" height="18px"> again. Six sample
+ballots should appear highlighted in the GPA File Manager window. To encrypt
+all of these ballots, hit
+<IMG SRC="../Documents/GPAFileEncryptIcon.jpg" height="18px"> (Encrypt the
+selected file). You will be asked to pick a key, but there should only be one.
+If GPA asks you if you <b>really</b> want to use this key, answer
+affirmatively.  The encrypted ballots are added to the Samples folder (for a
+sample ballot called sample_ballot.pdf, the encrypted ballot will be called
+either sample_ballot.pdf.gpg or sample_ballot.pdf.asc). </P>
+
+<P> From the pull-down menu at the top left of your screen, open up 
+<IMG SRC="../Documents/FedoraIcon.jpg" height="18px"> Applications,
+<IMG SRC="../Documents/SystemToolsIcon.jpg" height="18px"> System Tools,
+<IMG SRC="../Documents/TerminalIcon.jpg" height="18px"> Terminal.  In the
+Terminal window type: <code>test-decrypt</code></P>
+
+<P>The encrypted files in the Samples folder are first moved into the
+Encrypted folder, and then decrypted into the Decrypted folder.  You will be
+prompted for the pass phrase at the start of the decryption process.  The test
+succeeds if the ballot files in the Decrypted folder are identical to these in
+the Samples folder. If the test does not succeed, an error message will
+appear, and you will need to contact WHOM???</P>
+
+<A NAME="TBD">
+<H3>Testing Ballot Decryption</H3>
+
+<P>To prepare for testing the ballot decryption process, follow all of the
+instructions given above in the first paragraph under <A HREF="#TK">Testing
+Keys</A>. Next, write "DCdVBM Encrypted Ballots" on a blank CD and insert it
+into the computer.  A window will pop up asking you to "Choose what
+application to launch", with CD/DVD Creator as the default.
+Hit <IMG SRC="../Documents/CDOKButton.jpg" height="18px">.  If any files
+appear in the CD/DVD Creator Folder (perhaps you previously burned some files
+to CD/DVD), then remove them by selecting each and hitting the "Delete" key.
+Open (double-click on) the Samples folder on the desktop, and drag the
+encrypted files in this folder into the CD/DVD Creator Folder.
+Hit <IMG SRC="../Documents/CDWriteToDiskButton.jpg" height="18px">
+then <IMG SRC="../Documents/CDBurnButton.jpg" height="18px"> to burn the
+CD. If you get a message saying "Please eject the disk ... manually" go ahead
+and do so, and then hit <IMG SRC="../Documents/GPACancelButton.jpg"
+height="18px">.  Finally, hit
+<IMG SRC="../Documents/GPACloseButton.jpg" height="18px">.</P>
+
+<P>From the pull-down menu at the top left of your screen, open up
+<IMG SRC="../Documents/FedoraIcon.jpg" height="18px"> Applications, 
+<IMG SRC="../Documents/SystemToolsIcon.jpg" height="18px"> System Tools,
+<IMG SRC="../Documents/TerminalIcon.jpg" height="18px"> Terminal.  In the
+Terminal window type <code>ballots</code> to see the encrypted ballots on the
+CD.  To start the decryption test, type: <code>decrypt</code></P>
+
+<P>You will be prompted for the pass phrase, after which the encrypted files on
+the CD are decrypted into the Decrypted folder.  When the decryption finishes,
+type the command <code>test-same</code> into the Terminal window to determine
+success, that is, if the decrypted ballots in the Decrypted folder are
+identical to the originals in the Samples folder.  If the test does not
+succeed, an error message will appear, and you will need to contact WHOM???
+The final command to use after testing is <code>test-clean</code>, which
+removes all test data from the Decrypted and Encrypted folders. </P>
+
+<HR>
+<A NAME="PASS">
+<H2>Pass Phrase Selection</H2>
+
+<P>Your secret key is protected by a pass phrase you choose yourself, and the
+discovery (or brute-force cracking) of this pass phrase will lead to the
+exposure of your secret key, so choose your pass phrase carefully.  Here is
+what Wikipedia has to say on the subject:</P>
+
+<I><P>Typical advice about choosing a pass phrase includes suggestions that it
+should be: 
+<UL>
+<LI>Long enough to be hard to guess (e.g., automatically by a search program, as
+from a list of famous phrases).</LI>
+<LI>Not a famous quotation from literature, holy books, et cetera</LI>
+<LI>Hard to guess by intuition—even by someone who knows the user well</LI>
+<LI>Easy to remember and type accurately</LI>
+<LI>For better security, any easily memorable encoding at your own level can
+be applied. </LI>
+</UL></I>
+
+<P>Choosing a memorable phrase involving "shocking nonsense" is another
+good recommendation, for instance, something like:</P>
+
+<BLOCKQUOTE>My dog Tom likes to wear fancy Red Dresses</BLOCKQUOTE>
+
+<P>And don't you dare use the example above as your pass phrase!</P>
+
+<HR>
+<P>Author: Jeff Cook &lt;jeff.the.cook@gmail.com&gt;<BR />
+Date: 20 September 2010<BR />
+</P>
+
+</BODY>
+</HTML>
+

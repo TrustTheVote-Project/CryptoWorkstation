@@ -1,0 +1,55 @@
+#!/bin/bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+$HOME/test-clean decrypted-only
+if [ $? -ne "0" ]
+then
+    IFS=$SAVEIFS
+    exit 1
+fi
+
+DDIR="$HOME/Desktop/Decrypted"
+EDIR="$HOME/Desktop/Encrypted"
+SDIR="$HOME/Desktop/Samples"
+
+ls $SDIR/*\.[GgAa][PpSs][GgCc] 1>/dev/null 2>&1
+if [ $? -ne "0" ]
+then
+    ls $EDIR/*\.[GgAa][PpSs][GgCc] 1>/dev/null 2>&1
+    if [ $? -ne "0" ]
+    then
+	IFS=$SAVEIFS
+	echo "Nothing to do, no encrypted files in Samples or Encrypted folders."
+	exit 0
+    fi
+else
+    echo "  Moving encrypted Samples/ ballots into Encrypted/ ..."
+    mv $SDIR/*\.[GgAa][PpSs][GgCc] $EDIR	
+fi
+
+echo -e "\n  Decrypting ballots from Encrypted/ to Decrypted/ ..."
+echo " "
+FILES=`ls $EDIR/`
+if [ "$FILES" ]
+then
+    for f in $FILES
+    do
+	if `echo ${f} | grep "\.[GgAa][PpSs][GgCc]" 1>/dev/null 2>&1`
+	then
+	    echo "Encrypted ballot: $EDIR/$f"
+	    echo -n "  "
+	    /bin/cp "$EDIR/$f" $DDIR
+	    /usr/bin/gpg --batch --decrypt-files $DDIR/$f
+	    /bin/rm -rf $DDIR/$f
+	fi
+    done
+else
+    echo -e "\n**ERROR** FAILURE, no ballots in Encrypted/"
+    IFS=$SAVEIFS
+    exit 1
+fi
+echo " "
+$HOME/test-same
+IFS=$SAVEIFS
+exit $?

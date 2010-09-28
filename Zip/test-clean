@@ -1,0 +1,31 @@
+#!/bin/bash
+DDIR="$HOME/Desktop/Decrypted"
+if [ ! -e $DDIR ]
+then
+    echo "FATAL ERROR: Decrypted ballots folder non-existent: $DDIR/"
+    exit 1
+fi
+EDIR="$HOME/Desktop/Encrypted"
+if [ ! -e $EDIR ]
+then
+    echo "FATAL ERROR: Encrypted ballots folder non-existent: $EDIR/"
+    exit 1
+fi
+SDIR="$HOME/Desktop/Samples"
+if [ ! -e $SDIR ]
+then
+    echo "FATAL ERROR: Sample ballots folder non-existent: $SDIR/"
+    exit 1
+fi
+echo "Decrypted ballots folder: $DDIR/"
+echo "  Removing any existing decrypted ballots ..."
+echo "Encrypted ballots folder: $EDIR/"
+if [ $# != "1" ]
+then
+    echo "  Removing any existing encrypted ballots ..."
+    /bin/rm -rf $EDIR/*
+    
+fi
+/bin/rm -rf $DDIR/*
+echo "Sample ballots folder: $SDIR/"
+exit 0

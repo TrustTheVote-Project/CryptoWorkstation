@@ -1,0 +1,40 @@
+#!/bin/bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+DDIR="$HOME/Desktop/Decrypted"
+if [ ! -e $DDIR ]
+then
+    echo "FATAL ERROR: Decrypted ballots folder non-existent: $DDIR/"
+    IFS=$SAVEIFS
+    exit 1
+fi
+SDIR="$HOME/Desktop/Samples"
+if [ ! -e $SDIR ]
+then
+    echo "FATAL ERROR: Sample ballots folder non-existent: $SDIR/"
+    IFS=$SAVEIFS
+    exit 1
+fi
+X=`ls $DDIR/* 1>/dev/null 2>&1`
+if [ $? -ne 0 ] 
+then
+    echo "Nothing to do, no files in Decrypted folder."
+    IFS=$SAVEIFS
+    exit 0
+fi
+echo "Comparing decrypted ballots in Decrypted/ to originals in Samples/ ..."
+DIFFS=`diff --exclude="*\.[GgAa][PpSs][GgCc]" $SDIR $DDIR`
+if [ "$DIFFS" ]
+then
+    for f in $DIFFS
+    do
+	echo "  ${f}"
+    done
+    echo "**ERROR** Ballot contents not identical."
+    IFS=$SAVEIFS
+    exit 1
+else
+    echo -e "\n!!!Success!!! Ballots are identical.\n"
+fi
+IFS=$SAVEIFS
+exit 0

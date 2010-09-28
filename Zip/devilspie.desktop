@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/devilspie
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=DevilsPie
+Name=DevilsPie
+Comment[en_US]=
+Comment=

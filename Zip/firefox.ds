@@ -1,0 +1,6 @@
+(if
+(is (application_name) "Firefox")
+(begin
+(geometry "800x600-10-10")
+)
+)

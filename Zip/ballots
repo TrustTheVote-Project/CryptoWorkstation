@@ -1,0 +1,60 @@
+#!/bin/bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+DDIR="$HOME/Desktop/Decrypted"
+if [ ! -e $DDIR ]
+then
+    echo "FATAL ERROR: Decrypted ballot folder non-existent: $DDIR"
+    IFS=$SAVEIFS
+    exit 1
+fi
+EDIR="/media"
+if [ ! -e $EDIR ]
+then
+    echo "FATAL ERROR: External media mount folder non-existent: $EDIR"
+    IFS=$SAVEIFS
+    exit 1
+fi
+T=0
+MDIRS=`ls $EDIR/`
+if [ "$MDIRS" ]
+then
+    N=0
+    echo "Decrypted ballot folder: $DDIR"
+    for d in $MDIRS
+    do
+	echo -e "\nFound external media: $d"
+	read -p "Search for encrypted files [y/n]? " yn
+	if `echo ${yn} | grep [Yy] 1>/dev/null 2>&1`
+	then
+	    M=0
+            X=`ls $EDIR/$d/*.[GgAa][PpSs][GgCc] 1>/dev/null 2>&1`
+	    if [ $? -eq 0 ] 
+	    then 
+		M=`ls $EDIR/$d/*.[GgAa][PpSs][GgCc] | wc -l`
+		echo "Encrypted files found: $M"
+		let T+=M
+		read -p "Do you wish to list the file names [y/n]? " yn
+		if `echo ${yn} | grep [Yy] 1>/dev/null 2>&1`
+		then
+		    for f in `ls $EDIR/$d/*.[GgAa][PpSs][GgCc]`
+		    do
+			let N+=1
+			echo "$N $f"
+		    done
+		else
+		    let N+=M
+		fi
+	    else
+		echo "No encrypted files."
+	    fi
+	fi
+    done
+else
+    echo "No external media (CD/DVD/USB) found."
+    IFS=$SAVEIFS
+    exit 0
+fi
+echo -e "\nTotal number of encrypted files: $T\n"
+IFS=$SAVEIFS
+exit 0
