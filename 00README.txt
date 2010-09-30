@@ -28,7 +28,7 @@ Files:
 
   00README.txt - this file, you are reading it now
   cw-kiosk.ks - the kickstart file for the CW
-  cw-kspost.zip - zip repository for kickstart post-processing the CW
+  cw-kspost.zip - zip repository for kickstart post-processing
   DCDVBM-CW.iso - the ISO file holding the CW
   Log.txt - the log file generated while creating the ISO
   HOWTO-BURN-BOOTABLE-ISO.txt - the name says it all
@@ -37,32 +37,57 @@ Files:
 
 Directories:
 
-  Spin-Kickstarts - holds original copies of the pre-installed Kickstart files
-  Zip - holds the configuration files for kickstarting the CW
+  Spin-Kickstarts/ - holds original copies of pre-installed Kickstart files
+  Zip/ - holds configuration files for post-kickstarting the CW
 
 ****************
 ** make-cw.sh **
 ****************
 
-This script creates the CW.  It performs the following operations:
+The Bash script make-cw.sh creates the ISO for the CW.  Its primary function
+is to provide LiveCD-Creator with the data necessary to "kickstart" the CW.
+Two chunks of data are required: the pre-existing kickstart file cw-kiosk.ks
+and a script-created zip repository holding the contents of the Zip directory,
+which is copied to /var/www/html.  Once the kickstart process enters the
+"post-processing" phase, LiveCD-Creator has no access to the local file
+system, and any required data comes from "outside," in this case from the
+local web (httpd) server, whose file system is rooted at /var/www/html.  The
+IP address of the local host is required in order to access this web server.
 
-- Checks to see if the local IP address is the same as the built-in one
-- Ensures that the CW kickstart file uses the local IP address
-- Ensures that the CW kickstart file uses the correct zip file
-- Copies the CW kickstart file to /usr/share/spin-kickstarts
+The script performs the following operations:
+
+- Ensures that the built-in local IP address is correct
+- Ensures that the kickstart file uses the local IP address
+- Ensures that the kickstart file uses the correct zip file name
+- Copies the kickstart file to /usr/share/spin-kickstarts
 - Compares Spin-Kickstarts files with pre-installed ones, must be identical
 - Starts the httpd service
 - Turns off SELinux enforcement mode
-- Zips up data for the kickstart process
-- Copies the zip file to /var/www/html
+- Zips up the data for the zip repository, from the contents of Zip/
+- Copies the zip repository to /var/www/html
 - Checks if the target ISO file exists and if so asks for removal permission
 - Starts LiveCD-Creator in the background, with output logged to Log.txt
-- Then monitors progress via the Log.txt file
+- Then monitors progress via (tail -f of) the Log.txt file
 - Finishes with "Setting supported flag to 0" followed by some line feeds
 
-The LiveCD-Creator program creates the CW, a bootable ISO, using the
-instructions in the kickstart file and the configuration data in the zip
-repository.
+!!!!!!!!!!!!!
+!! WARNING !!
+!!!!!!!!!!!!!
+
+Red Hat Bugzilla - Bug 624028 - livecd-creator creates iso that doesn't boot
+
+The author has been struggling with this bug since late August, 2010.  It took
+me about 10 days to get livecd-creator to work properly on my PC after first
+encountering the bug, and I am unsure of exactly what I did to fix the
+problem.  My current Fedora 13 development system uses livecd-creator to
+generate ISOs that successfully re-boot my PC, after being burned to external
+media such as CD/DVD/USB.  However, the local Virtual Machine Manager will not
+boot these ISO, and still reports the error message mentioned in the bug.
+
+So I am afraid that, under the currently broken state of Fedora 13, my
+procedure for creating a Crypto Workstation from scratch is not replicable.  
+I would appreciate feedback from anyone attempting this process who either
+succeeds or fails.  My contact information appears at the end.
 
 *********************
 ** Spin-Kickstarts **
@@ -108,4 +133,4 @@ Please send any comments or feedback to:
 jeff.the.cook@gmail.com
 
 Jeffrey V. Cook
-27 September 2010
+29 September 2010
