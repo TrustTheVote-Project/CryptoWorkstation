@@ -30,6 +30,7 @@ firewall --enabled
 
 %packages
 @printing
+hplip
 devilspie
 gpa
 xguest
