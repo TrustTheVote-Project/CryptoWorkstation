@@ -1,0 +1,6 @@
+(if
+(contains (window_name) "File Browser")
+(begin
+(geometry "-0+25")
+)
+)
