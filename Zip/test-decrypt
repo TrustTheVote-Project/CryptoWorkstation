@@ -10,8 +10,8 @@ then
 fi
 
 DDIR="$HOME/Desktop/Decrypted"
-EDIR="$HOME/Desktop/Encrypted"
-SDIR="$HOME/Desktop/Samples"
+EDIR="$HOME/Desktop/B.Encrypted"
+SDIR="$HOME/Desktop/A.Samples"
 
 ls $SDIR/*\.[GgAa][PpSs][GgCc] 1>/dev/null 2>&1
 if [ $? -ne "0" ]

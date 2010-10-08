@@ -5,13 +5,13 @@ then
     echo "FATAL ERROR: Decrypted ballots folder non-existent: $DDIR/"
     exit 1
 fi
-EDIR="$HOME/Desktop/Encrypted"
+EDIR="$HOME/Desktop/B.Encrypted"
 if [ ! -e $EDIR ]
 then
     echo "FATAL ERROR: Encrypted ballots folder non-existent: $EDIR/"
     exit 1
 fi
-SDIR="$HOME/Desktop/Samples"
+SDIR="$HOME/Desktop/A.Samples"
 if [ ! -e $SDIR ]
 then
     echo "FATAL ERROR: Sample ballots folder non-existent: $SDIR/"

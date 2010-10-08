@@ -8,7 +8,7 @@ then
     IFS=$SAVEIFS
     exit 1
 fi
-SDIR="$HOME/Desktop/Samples"
+SDIR="$HOME/Desktop/A.Samples"
 if [ ! -e $SDIR ]
 then
     echo "FATAL ERROR: Sample ballots folder non-existent: $SDIR/"

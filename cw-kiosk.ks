@@ -82,9 +82,10 @@ mv test-same /home/liveuser
 mkdir -p /home/liveuser/Documents
 mv Icons/* /home/liveuser/Documents
 mkdir -p /home/liveuser/Desktop
-mv Samples /home/liveuser/Desktop
+mkdir -p /home/liveuser/Desktop/A.Samples
+mv Samples/* /home/liveuser/Desktop/A.Samples
 mv HOWTO.htm /home/liveuser/Desktop
-mkdir -p /home/liveuser/Desktop/Encrypted
+mkdir -p /home/liveuser/Desktop/B.Encrypted
 mkdir -p /home/liveuser/Desktop/Decrypted
 mkdir -p /home/liveuser/.gnupg
 mv gpg.conf /home/liveuser/.gnupg
@@ -95,6 +96,8 @@ mkdir -p /home/liveuser/.config/autostart
 mv devilspie.desktop /home/liveuser/.config/autostart
 mkdir -p /home/liveuser/.devilspie
 mv firefox.ds /home/liveuser/.devilspie
+mv terminal.ds /home/liveuser/.devilspie
+mv nautilus.ds /home/liveuser/.devilspie
 ln -s /usr/share/applications/mozilla-firefox.desktop /home/liveuser/.config/autostart/mozilla-firefox.desktop
 cd /home/
 chown -R 501:501 liveuser

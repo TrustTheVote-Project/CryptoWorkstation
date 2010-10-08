@@ -15,6 +15,12 @@ CODE
    font-weight:bold;
    }
 -->
+<!--
+.indented
+   {
+   padding-left: 30pt;
+   }
+-->
 </STYLE>
 </HEAD>
 
@@ -27,8 +33,9 @@ CODE
   following types of operations: 
 <ul>
 <li><A HREF="#KEY">Key Generation and Backup</A></li>
-<li><A HREF="#DEC">Ballot Decryption</A></li>
+<li><A HREF="#IMPORT">Key Import</A></li>
 <li><A HREF="#TES">Testing</A></li>
+<li><A HREF="#DEC">Ballot Decryption</A></li>
 </ul>
 </P>
 
@@ -39,16 +46,28 @@ minimum of two external media devices, one dedicated to booting and running
 the Crypto Workstation, and the other for writing data files to external
 media.</P>
 
-<HR>
-<A NAME="KEY">
+<P>Installation and Startup: Insert the bootable media containing the Crypto
+Workstation into your PC and reboot.  The boot process might take a while,
+depending on the speed of your PC and its boot device.  During the boot
+process you will see a blue screen with a centered white progress indicator,
+after which you will see the final screen, the Desktop.  In the lower
+right-hand corner is a Firefox window that displays the contents of the
+HOWTO.htm file on the Desktop, which contains instructions on how to proceed
+with your intended tasks.</P>
+
+<P>Shutdown: Select the "Shut Down ..." option from the "System" menu at the
+top left of the screen.</P>
+
+<A NAME="KEY"><HR>
 <H2>DCdVBM Key Generation and Backup</A></H2>
 
 <P>Before generating the cryptographic key pair to be used in the DCdVBM
 project, pick a strong pass phrase to protect the secret key (also called the
-private key), and write it down on a piece of paper
-(see <A HREF="#PASS">Pass Phrase Selection</A> for information on how to pick a
-good strong pass phrase).  Take good care of this piece of paper, because the
-pass phrase written on it is as sensitive as the secret key itself.  After the
+private key), and type it up on a piece of paper (see <A HREF="#PASS">Pass
+Phrase Selection</A> for information on how to pick a good strong pass
+phrase).  Take good care of this piece of paper, because the pass phrase it
+holds is as sensitive as the secret key itself.  Typing it rather than writing
+it ensures its legibility for any Crypto Workstation administrator.  After the
 keys are generated, make backups and write them to CDs for permanent storage.
 Public key CDs may be distributed to anyone who needs them, for encrypting
 ballots.  Secret key CDs must be placed in secure storage, as must the paper
@@ -154,71 +173,25 @@ new keys can be tested immediately after their backup copies are burned to CD.
 To test the backup CDs, delete the keys from the GPA, and then re-run the
 tests, which will require re-importation of the keys from backup CDs. </P>
 
-<HR>
-<A NAME="DEC">
-<H2>DCdVBM Ballot Decryption</A></H2>
+<A NAME="IMPORT"><HR>
+<H2>Key Import</H2>
 
-<P>A secret key is required for decryption, and the first step is to import
-this key, so go ahead and fetch the DCdVBM Secret Key CD from secure
-storage.</P>
-
-<A NAME="IMPORT">
-<H3>Key Import</H3>
-
-<P>Insert the DCdVBM Secret Key CD into the computer, and wait for the CD icon
-to appear on your screen <IMG SRC="../Documents/GPAIcon.jpg" align="left"
-height="48px">. Start up the GPA by double-clicking on the GPA icon.  A
-notification window will pop up, about you not having a private key (but you
-are about to import one), so
-hit <IMG SRC="../Documents/GPADoItLaterButton.jpg" height="18px">.  To import
-the secret key, hit <IMG SRC="../Documents/GPAKeyImportIcon.jpg"
+<P>Insert the CD containing your secret (or public) key into the computer, and
+wait for the CD icon to appear on your
+screen <IMG SRC="../Documents/GPAIcon.jpg" align="left" height="48px">. Start
+up the GPA by double-clicking on the GPA icon.  A notification window will pop
+up, about you not having a private key, ignore it by
+hitting <IMG SRC="../Documents/GPADoItLaterButton.jpg" height="18px"> .  To
+import the key, hit <IMG SRC="../Documents/GPAKeyImportIcon.jpg"
 height="18px"> (Import Keys).  Browse to the CD, select the file
-named <code>secret-key-DCDVBM.asc</code>, then
+named <code>secret/public-key-DCDVBM.asc</code>, then
 hit <IMG SRC="../Documents/GPAOpenButton.jpg" height="18px"> (if you are asked
 any questions at this point, choose the option that allows you to proceed with
 the import) and <IMG SRC="../Documents/GPACloseButton.jpg" height="18px">.
-The DCdVBM secret key is now available for decrypting ballots.  To import the
-DCdVBM public key, repeat this process using the DCdVBM Public Key CD and the
-file named <code>public-key-DCDVBM.asc</code>. </P>
+Your DCdVBM secret/public key is now available for decrypting/encrypting
+ballots.</P>
 
-<H3>Ballot Decryption</H3>
-
-<P>First ensure that the Decrypted folder on the desktop is empty, as this is
-where the decrypted ballots are placed (it might contain sample ballots, for
-instance, if testing had just been performed).  Insert the CD containing the
-DCdVBM encrypted ballots into the PC, and wait for the CD icon to appear on
-the desktop. (These same instructions apply if the encrypted ballots are on
-external media other than CD, such as DVD or a USB drive.) From the pull-down
-menu at the top of your screen, open up
-<IMG SRC="../Documents/FedoraIcon.jpg" height="18px"> Applications,
-<IMG SRC="../Documents/SystemToolsIcon.jpg" height="18px"> System Tools,
-<IMG SRC="../Documents/TerminalIcon.jpg" height="18px"> Terminal.  First, to
-check and see what ballots are available for decrypting, type the following command
-into the Terminal window: <code>ballots</code> </P> 
-
-<P>If everything looks satisfactory, go ahead and enter the following command
-to decrypt the ballots: <code>decrypt</code></P>
-
-<P>Decryption requires access to the secret key, so you will be prompted for
-the pass phrase, but only once, because after first usage it is securely cached
-for use in subsequent decryptions.  All of the encrypted ballot files on
-external media, that is, all files ending in .gpg or .asc appearing at the top
-level of such media, will be decrypted and placed in the Decrypted folder on
-the desktop.</P>
-
-<P>For instructions on testing the ballot decryption process, which is highly
-recommended, see <A HREF="#TBD">Testing Ballot Decryption</A> below.</P>
-
-<H3>Printing Ballots</H3>
-
-<P>Because of the enhanced security rules in effect for the operating
-environment of the DCdVBM Crypto Workstation, facilities for adding a printer
-to the environment may be not available at this time.  We are still searching
-for a solution to this problem, but for now, to print the decrypted ballots,
-write them to CD/DVD/USB and print from a different computer.</P>
-
-<HR>
-<A NAME="TES">
+<A NAME="TES"><HR>
 <H2>Testing</H2>
 
 <P>After generating new keys and before shutting down the DCdVBM Crypto
@@ -262,8 +235,7 @@ Terminal window type: <code>test-decrypt</code></P>
 Encrypted folder, and then decrypted into the Decrypted folder.  You will be
 prompted for the pass phrase at the start of the decryption process.  The test
 succeeds if the ballot files in the Decrypted folder are identical to these in
-the Samples folder. If the test does not succeed, an error message will
-appear, and you will need to contact WHOM???</P>
+the Samples folder.</P>
 
 <A NAME="TBD">
 <H3>Testing Ballot Decryption</H3>
@@ -296,13 +268,89 @@ CD.  To start the decryption test, type: <code>decrypt</code></P>
 the CD are decrypted into the Decrypted folder.  When the decryption finishes,
 type the command <code>test-same</code> into the Terminal window to determine
 success, that is, if the decrypted ballots in the Decrypted folder are
-identical to the originals in the Samples folder.  If the test does not
-succeed, an error message will appear, and you will need to contact WHOM???
-The final command to use after testing is <code>test-clean</code>, which
-removes all test data from the Decrypted and Encrypted folders. </P>
+identical to the originals in the Samples folder.  The final command to use after 
+testing is <code>test-clean</code>, which removes all test data from the Decrypted
+and Encrypted folders. </P>
 
-<HR>
-<A NAME="PASS">
+<A NAME="DEC"><HR>
+<H2>DCdVBM Ballot Decryption</A></H2>
+
+<P>The ballot decryption process consists of taking encrypted ballots from a
+CD, decrypting them using the DCdVBM Secret Key, and then putting the
+decrypted ballots into the Decrypted folder on the Desktop.  Except for
+inserting and removing external media, this process is almost completely
+automated, and is described in detail below.  For instructions on printing the
+results, see <A HREF="#PRINT">Printing Ballots</A> below.</P>
+
+<P>1. A secret key is required for decryption, so fetch the DCdVBM Secret Key CD
+from secure storage and import the key by following the instructions
+in <A HREF="#IMPORT">Key Import</A>.  After the key is imported, eject the CD
+and put it back into secure storage.
+
+<P>2. Load the encrypted ballots, stored on CD or other external media, by
+inserting the media into the computer, after which an icon or a file browser
+window will appear on the Desktop.</P>
+
+<P>3. Start the Terminal application. From the pull-down menu at the top of your
+screen, open up
+<IMG SRC="../Documents/FedoraIcon.jpg" height="18px"> Applications,
+<IMG SRC="../Documents/SystemToolsIcon.jpg" height="18px"> System Tools,
+<IMG SRC="../Documents/TerminalIcon.jpg" height="18px"> Terminal.  The
+Terminal provides a command-line interface, where commands are typed in
+after the prompt (a dollar "$" sign).</P>
+
+<P CLASS="indented">
+If you did some testing after starting up the Crypto Workstation, type the
+following command to clean up the test results: <code>test-clean</code></P>
+
+<P>4. To see which encrypted ballots appear on external media, type the
+following command: <code>ballots</code></P>
+
+<P CLASS="indented">
+The <code>ballots</code> command names each external media device connected to
+the computer, asks if it should "Search for encrypted files [y/n]?" and if the
+answer is "y" and some are found, asks "Do you wish to list the file names
+[y/n]?"  Answer "y" again to list the names of encrypted files found on the
+external media.
+
+<P>5. To proceed with the ballot decryption process, type the following
+command: <code>decrypt</code></P>
+
+<P CLASS="indented">
+The <code>decrypt</code> command mimics the <code>ballots</code> command,
+except that it goes ahead and decrypts the files instead of listing their
+names.  Decryption requires access to the secret key, so you will be prompted
+for the pass phrase, but only once, because after first usage it is securely
+cached for use in subsequent decryptions.</P>
+
+<P>6. When done, you may close the Terminal window by hitting the "X" in the
+upper right corner or by typing the command: <code>exit</code></P>
+
+<P>For instructions on testing the ballot decryption process using sample
+ballots, which is highly recommended, see <A HREF="#TBD">Testing Ballot
+Decryption</A>.</P>
+
+<A NAME="PRINT">
+<H3>Printing Ballots</H3>
+
+<P>To check the status of your printer, select "Printing" under
+"Administration" from the "System" menu at the top left of the screen, and see
+if your printer is listed.  If so, double-click your printer icon and hit the
+"Print Test Page" button to make sure it is working properly.  To print files,
+use the <code>lpr</code> command from the Terminal application.  The following
+two commands will print all of the decrypted ballots:
+
+<P CLASS="indented"><CODE>cd ~/Desktop/Decrypted<BR />
+lpr *</CODE></P>
+
+<P>Most common printer drivers pre-installed on the Crypto Workstation. But if
+your printer is not recognized or does not function properly, there is
+currently no mechanism (due to security restrictions) for updating the local
+printer drivers.  If printing is not working for your Crypto Workstation, then
+write the decrypted ballots to CD or other external media and print from a
+different computer.</P>
+
+<A NAME="PASS"><HR>
 <H2>Pass Phrase Selection</H2>
 
 <P>Your secret key is protected by a pass phrase you choose yourself, and the
@@ -316,7 +364,7 @@ should be:
 <LI>Long enough to be hard to guess (e.g., automatically by a search program, as
 from a list of famous phrases).</LI>
 <LI>Not a famous quotation from literature, holy books, et cetera</LI>
-<LI>Hard to guess by intuition—even by someone who knows the user well</LI>
+<LI>Hard to guess by intuition&mdash;even by someone who knows the user well</LI>
 <LI>Easy to remember and type accurately</LI>
 <LI>For better security, any easily memorable encoding at your own level can
 be applied. </LI>
@@ -331,7 +379,7 @@ good recommendation, for instance, something like:</P>
 
 <HR>
 <P>Author: Jeff Cook &lt;jeff.the.cook@gmail.com&gt;<BR />
-Date: 20 September 2010<BR />
+Date: 7 October 2010<BR />
 </P>
 
 </BODY>

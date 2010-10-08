@@ -3,7 +3,7 @@
 ************************
 
 This document gives the system requirements for the Crypto Workstation (CW)
-and provides installation and startup instructions.
+and provides installation, startup, and shutdown instructions.
 
 System Requirements: The Personal Computer (PC) on which the CW is to run (a
 Microsoft Windows compatible computer) must have at least two external media
@@ -24,6 +24,9 @@ you will see the final screen, the Desktop, of the CW.  In the lower
 right-hand corner is a Firefox window that displays the contents of the
 HOWTO.htm file on the Desktop, which contains instructions on how to proceed
 with your intended tasks.
+
+To shut down the CW, click on the pull-down menu at the top labeled "System" 
+and then select "Shut Down ...".
 
 ----------------------------------------
 Please send any comments or feedback to:
